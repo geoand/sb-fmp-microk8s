@@ -47,16 +47,14 @@ kube-system          replicaset.apps/kube-dns-864b8bdc77              1         
 
 ```bash
 microk8s.kubectl config view --raw > /tmp/kubeconfig
-/snap/microk8s/current/usr/bin/docker -H tcp://0.0.0.0:2375 pull fabric8/java-centos-openjdk8-jdk:1.5
-
 ```
 
 ## Deploy application
 
 ```bash
 export KUBECONFIG=/tmp/kubeconfig
-./mvnw clean fabric8:push 
-./mvnw fabric8:deploy
+./mvnw clean package fabric8:build fabric8:push 
+./mvnw -DskipTest fabric8:deploy
 ```
 
 Make sure the application was deployed be executing:
