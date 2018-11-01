@@ -23,6 +23,7 @@
         <arquillian-cube.version>1.18.2</arquillian-cube.version>
         <arquillian.version>1.4.0.Final</arquillian.version>
         <rest-assured.version>3.2.0</rest-assured.version>
+      <spring-cloud-kubernetes.version>0.3.0.RELEASE</spring-cloud-kubernetes.version>
 
         <!--
             We use the unix socket where microk8s' docker daemon listens
@@ -140,6 +141,11 @@
                 <artifactId>rest-assured</artifactId>
                 <version>${rest-assured.version}</version>
             </dependency>
+            <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-kubernetes-config</artifactId>
+              <version>${spring-cloud-kubernetes.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -147,6 +153,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-kubernetes-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator-autoconfigure</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
