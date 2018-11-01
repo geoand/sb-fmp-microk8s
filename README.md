@@ -6,10 +6,9 @@
 sudo snap install microk8s --classic --channel=1.11/stable
 sudo sed -i  's@unix://${SNAP_DATA}/docker.sock@tcp://0.0.0.0:2375@g' /var/snap/microk8s/current/args/dockerd
 sudo sed -i  's@unix://${SNAP_DATA}/docker.sock@tcp://0.0.0.0:2375@g' /var/snap/microk8s/current/args/kubelet
-sudo snap stop microk8s
-sleep 10
-sudo snap start microk8s
-sleep 10
+sudo systemctl restart snap.microk8s.daemon-docker
+while ! curl localhost:2375 &> /dev/null  ;  do echo "Waiting for dockerd"; sleep 2; done; 
+sudo systemctl restart snap.microk8s.daemon-kubelet;
 microk8s.enable dns registry
 ```
 
