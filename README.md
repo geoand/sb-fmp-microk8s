@@ -54,8 +54,9 @@ microk8s.kubectl config view --raw > /tmp/kubeconfig
 ## Deploy application
 
 ```bash
-export KUBECONFIG=/tmp/kubeconfig 
-./mvnw clean fabric8:deploy
+export KUBECONFIG=/tmp/kubeconfig
+./mvnw clean fabric8:push 
+./mvnw fabric8:deploy
 ```
 
 Make sure the application was deployed be executing:
