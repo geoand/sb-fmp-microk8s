@@ -18,7 +18,13 @@
     </parent>
 
     <properties>
+        <!--
+            We assume that microk8s' docker daemon was configured to listen on port 2375
+            This is done because FMP doesn't play well with a unix socket other than the default one
+        -->
         <docker.host>tcp://0.0.0.0:2375</docker.host>
+
+        <!-- This is the default port of the container registry that comes with microk8s -->
         <docker.registry>localhost:32000</docker.registry>
         <java.version>1.8</java.version>
     </properties>
@@ -35,6 +41,10 @@
                 <artifactId>fabric8-maven-plugin</artifactId>
                 <version>3.5.42</version>
                 <configuration>
+                    <!--
+                        FMP can work with Openshift as well, so here we explicitly force it
+                        to work with vanilla Kubernetes and Docker builds
+                    -->
                     <buildStrategy>docker</buildStrategy>
                     <mode>kubernetes</mode>
                 </configuration>
