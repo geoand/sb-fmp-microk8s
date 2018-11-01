@@ -71,4 +71,10 @@ NAME                               READY     STATUS    RESTARTS   AGE
 sb-fmp-microk8s-5fbb7646dc-66t7b   1/1       Running   0          57s
 ```
 
+You can also see the service in action by issuing:
+
+```bash
+curl http://localhost:32222
+```
+
 
