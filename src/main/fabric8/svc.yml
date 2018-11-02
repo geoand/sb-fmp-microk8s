@@ -1,13 +1,5 @@
-# we are using an FMP fragment to ensure that NodePort is used correctly
-kind: Service
-apiVersion: v1
-metadata:
-  name: ${project.artifactId}
-  labels:
-    app: ${project.artifactId}
+# We are using an FMP fragment to ensure that NodePort is used correctly
 spec:
-  selector:
-    app: ${project.artifactId}
   ports:
     - protocol: TCP
       port: 8080

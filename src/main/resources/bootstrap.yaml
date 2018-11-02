@@ -3,6 +3,7 @@ spring:
     name: sck-example
   cloud:
     kubernetes:
+      # enable reloading of the application when on the property sources has changed
       reload:
         enabled: true
         mode: polling

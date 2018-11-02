@@ -1,3 +1,8 @@
+# Purpose
+
+Demonstrate how a Spring Cloud Kubernetes application can be deployed and tested onto a local cluster
+created with microk8s
+
 # Instructions
 
 ## Install microk8s
@@ -40,11 +45,18 @@ kube-system          replicaset.apps/kube-dns-864b8bdc77              1         
 
 ## Setup environment for FMP to work
 
+One premise for the Fabric8 Maven Plugin to work is that is can read the proper Kubernetes Config file.
+We export the corresponding config file for the cluster microk8s sets up to temp file which will
+be used later
+
 ```bash
 microk8s.kubectl config view --raw > /tmp/kubeconfig
 ```
 
 ## Deploy application
+
+Since FMP is based on the Fabric8 Kubernetes Client, we can leverage the `KUBECONFIG` environment variable
+to make FMP aware of the Kubernetes Config file we created above
 
 ```bash
 export KUBECONFIG=/tmp/kubeconfig
@@ -67,7 +79,7 @@ sb-fmp-microk8s-5fbb7646dc-66t7b   1/1       Running   0          57s
 You can also see the service in action by issuing:
 
 ```bash
-curl http://localhost:32222
+curl http://localhost:32222/greeting
 ```
 
 An integration test can also be run against the service which is deployed inside the cluster by executing:
@@ -75,5 +87,9 @@ An integration test can also be run against the service which is deployed inside
 ```bash
 ./mvnw verify -Pit -Dfabric8.skip
 ```
+
+This integration tests runs locally (making it easily debuggable), and interacts with the deployed service
+using the exposed port.
+By leveraging Aquillian Cube Kubernetes, it's able to setup and teardown resources needed for each test (in this case a config map)
 
 
