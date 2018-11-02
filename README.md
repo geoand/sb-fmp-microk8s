@@ -4,11 +4,7 @@
 
 ```bash
 sudo snap install microk8s --classic --channel=1.11/stable
-sudo sed -i  's@unix://${SNAP_DATA}/docker.sock@tcp://0.0.0.0:2375@g' /var/snap/microk8s/current/args/dockerd
-sudo sed -i  's@unix://${SNAP_DATA}/docker.sock@tcp://0.0.0.0:2375@g' /var/snap/microk8s/current/args/kubelet
-sudo systemctl restart snap.microk8s.daemon-docker
-while ! curl localhost:2375 &> /dev/null  ;  do echo "Waiting for dockerd"; sleep 2; done; 
-sudo systemctl restart snap.microk8s.daemon-kubelet;
+sleep 10
 microk8s.enable dns registry
 ```
 
@@ -52,8 +48,7 @@ microk8s.kubectl config view --raw > /tmp/kubeconfig
 
 ```bash
 export KUBECONFIG=/tmp/kubeconfig
-./mvnw clean package fabric8:build fabric8:push 
-./mvnw -DskipTest fabric8:deploy
+./mvnw clean package fabric8:build fabric8:push fabric8:deploy 
 ```
 
 Make sure the application was deployed be executing:
