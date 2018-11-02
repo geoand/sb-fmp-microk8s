@@ -70,4 +70,10 @@ You can also see the service in action by issuing:
 curl http://localhost:32222
 ```
 
+An integration test can also be run against the service which is deployed inside the cluster by executing:
+
+```bash
+./mvnw verify -Pit -Dfabric8.skip
+```
+
 

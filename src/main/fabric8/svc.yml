@@ -11,5 +11,5 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
-      nodePort: 32222
+      nodePort: ${nodeport.value}
   type: NodePort
